@@ -7,6 +7,5 @@ pandas==2.1.1
 plotly==5.17.0
 bokeh==3.2.2
 numpy==1.26.0
-datashader==0.14.4
-pillow>=7.1.0,<10
+
 
