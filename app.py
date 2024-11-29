@@ -22,9 +22,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-import datashader as ds
-import datashader.transfer_functions as tf
-from PIL import Image
+# import datashader as ds
+# import datashader.transfer_functions as tf
+# from PIL import Image
 
 st.set_page_config(layout='wide')
 @st.cache_data
@@ -319,33 +319,34 @@ def plot_bokeh_():
     
 def datashader_plot():
     # Load dataset
-    df = st.session_state.data
+    st.header('dasher')
+    # df = st.session_state.data
 
-    # Aggregation function for datashader scatter plot
-    def create_image(x_range, y_range, w=700, h=500):
-        cvs = ds.Canvas(plot_width=w, plot_height=h, x_range=x_range, y_range=y_range)
-        agg = cvs.points(df, 'InhousePowerRate', 'UnplannedOutageRate')
-        img = tf.shade(agg, cmap=["lightblue", "darkblue"], how="linear").to_pil()
-        return img
+    # # Aggregation function for datashader scatter plot
+    # def create_image(x_range, y_range, w=700, h=500):
+    #     cvs = ds.Canvas(plot_width=w, plot_height=h, x_range=x_range, y_range=y_range)
+    #     agg = cvs.points(df, 'InhousePowerRate', 'UnplannedOutageRate')
+    #     img = tf.shade(agg, cmap=["lightblue", "darkblue"], how="linear").to_pil()
+    #     return img
 
-    if st.session_state.plot == 'scattered':
-        start_time = time.time()
+    # if st.session_state.plot == 'scattered':
+    #     start_time = time.time()
 
-        # Define range of the data
-        x_range = (df['InhousePowerRate'].min(), df['InhousePowerRate'].max())
-        y_range = (df['UnplannedOutageRate'].min(), df['UnplannedOutageRate'].max())
+    #     # Define range of the data
+    #     x_range = (df['InhousePowerRate'].min(), df['InhousePowerRate'].max())
+    #     y_range = (df['UnplannedOutageRate'].min(), df['UnplannedOutageRate'].max())
 
-        # Generate the image using Datashader
-        img = create_image(x_range, y_range)
+    #     # Generate the image using Datashader
+    #     img = create_image(x_range, y_range)
 
-        # Display scatter plot in Streamlit
-        st.image(img, caption="Scatter Plot with Datashader", use_container_width=True)
+    #     # Display scatter plot in Streamlit
+    #     st.image(img, caption="Scatter Plot with Datashader", use_container_width=True)
 
-        plot_time_scatter = time.time() - start_time
-        st.write(f"Time taken to create Scatter Plot: {plot_time_scatter:.2f} seconds")
+    #     plot_time_scatter = time.time() - start_time
+    #     st.write(f"Time taken to create Scatter Plot: {plot_time_scatter:.2f} seconds")
 
-    else:
-        st.write("Datashader currently supports only Scatter Plot for this implementation.")
+    # else:
+    #     st.write("Datashader currently supports only Scatter Plot for this implementation.")
 
 
 # Add Datashader to the options
